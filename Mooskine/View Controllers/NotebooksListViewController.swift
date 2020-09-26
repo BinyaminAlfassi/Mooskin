@@ -183,10 +183,8 @@ extension NotebooksListViewController {
             tableView.insertRows(at: [newIndexPath!], with: .fade )
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        default:
+            break
         }
     }
 }

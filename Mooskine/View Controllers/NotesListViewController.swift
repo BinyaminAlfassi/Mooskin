@@ -32,12 +32,11 @@ class NotesListViewController: UIViewController, UITableViewDataSource {
 
         navigationItem.title = notebook.name
         navigationItem.rightBarButtonItem = editButtonItem
-        
-        setupFetchedResultsController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupFetchedResultsController()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: false)
@@ -47,6 +46,10 @@ class NotesListViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         fetchedResultsController = nil
     }
     
@@ -173,11 +176,8 @@ extension NotesListViewController: NSFetchedResultsControllerDelegate {
             tableView.insertRows(at: [newIndexPath!], with: .fade )
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        default:
+            break
         }
     }
-    
 }
